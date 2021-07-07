@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\SIGNALR\\BackEnd\\Notifications\\Notifications\\Notifications.csproj": {}
+    "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj": {}
   },
   "projects": {
-    "D:\\Github\\SIGNALR\\BackEnd\\Notifications\\Notifications\\Notifications.csproj": {
+    "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\SIGNALR\\BackEnd\\Notifications\\Notifications\\Notifications.csproj",
-        "projectName": "Notifications",
-        "projectPath": "D:\\Github\\SIGNALR\\BackEnd\\Notifications\\Notifications\\Notifications.csproj",
+        "projectUniqueName": "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj",
+        "projectName": "SignalRChatServer",
+        "projectPath": "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj",
         "packagesPath": "C:\\Users\\Erdal\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\SIGNALR\\BackEnd\\Notifications\\Notifications\\obj\\",
+        "outputPath": "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -24,15 +24,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -43,14 +43,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.SignalR": {
-              "target": "Package",
-              "version": "[1.1.0, )"
-            }
-          },
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",

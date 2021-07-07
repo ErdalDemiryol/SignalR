@@ -16,7 +16,7 @@
              $(document).ready(()=>{
                     
                 //const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/chathub").build();
-                const connection = new signalR.HubConnectionBuilder().withUrl("http://chat.marineautomationsystems.com/chathub").build();
+                const connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:55383/chathub").build();
                 
                 connection.start();
 
@@ -48,9 +48,7 @@
                     if(_groupName !=""){
                         connection.invoke("SendMessageToGroupAsync",_groupName,message)
                     }
-
                 });
-
 
                 $("#btnGirisYap").click(()=>{
                     const nickName = $("#txtNickName").val();
@@ -112,8 +110,6 @@
 
             });
 
-
-
          </script>
          
     </head>
@@ -123,7 +119,7 @@
         <div class="row p-20">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <div class="row">
+                <div class="row p-20">
                     <!-- Sol Menu-->
                     <div class="col-md-3">
                         <!-- Oda (Grup)-->
