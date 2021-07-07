@@ -4,18 +4,20 @@
         <title>SignalR_Client</title>
 
          <!-- Write your comments here -->
-         <script src="signalr.min.js"></script>
-         <script src="jquery.min.js"></script>
-         <script src="bootstrap.min.js"></script>
+         <script src="js/signalr.min.js"></script>
+         <script src="js/jquery.min.js"></script>
+         <script src="js/bootstrap.min.js"></script>
 
-         <link rel="stylesheet"  href="styles/bootstrap.min.css">
-         <link rel="stylesheet"  href="styles/style.css">
+         <link rel="stylesheet"  href="css/bootstrap.min.css">
+         <link rel="stylesheet"  href="css/style.css">
 
          <script>
 
              $(document).ready(()=>{
                     
-                const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/chathub").build();
+                //const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/chathub").build();
+                const connection = new signalR.HubConnectionBuilder().withUrl("http://chat.marineautomationsystems.com/chathub").build();
+                
                 connection.start();
 
                 $('.disabled').attr("disabled","disabled");
@@ -39,6 +41,16 @@
                     _message.find("h5")[1].innerHTML="SEN";
                     $('.messages').append(_message);
                 });
+
+                let _groupName="";
+                $("#btnGrubaGonder").click(()=>{
+                    const message = $('#txtMesaj').val();
+                    if(_groupName !=""){
+                        connection.invoke("SendMessageToGroupAsync",_groupName,message)
+                    }
+
+                });
+
 
                 $("#btnGirisYap").click(()=>{
                     const nickName = $("#txtNickName").val();
@@ -72,18 +84,16 @@
                 });
             
                 connection.on("groups", groups => {
-
                     console.log(groups);
                     $('.rooms').html("");
+                    $('.rooms').append(`<option selected value="-1">Tümü</option>`)
                     $.each(groups,(index,item) =>{
                         $('.rooms').append(`<option selected value="${item.groupName}">${item.groupName}</option>`)
                     });
-
                 });
 
                 $("#btnOdaOlustur").click(()=>{
                     connection.invoke("AddGroup", $("#txtOdaAdi").val());
-
                 });
 
                 $("#btnOdalaraGir").click(()=>{
@@ -91,7 +101,13 @@
                     $(".rooms option:selected").map((i,e)=>{
                         groupNames.push(e.innerHTML);
                     });
-                    connection.invoke("AddClientToGroup",groupNames);
+                    connection.invoke("AddClientToGroup", groupNames);
+                });
+                
+                $(".rooms").change(function(){
+                    let groupName=$(this).val();
+                    _groupName = groupName[0];
+                    connection.invoke("GetClientToGroup", groupName[0]);
                 });
 
             });
@@ -114,7 +130,7 @@
                         <input id="txtOdaAdi" class="form-control form-control-lg disabled" type="text" placeholder="Oda Adı">
                         <button id="btnOdaOlustur" class="btn btn-info rightButton disabled">Oda Oluştur</button>
 
-                        <select size="5" style="width: 100%;" class="form-select disabled rooms" multiple>
+                        <select class="form-select disabled rooms" size="5" style="width: 100%;" multiple>
                             <option selected value="-1">Odalar</option>
                         </select>
 
@@ -143,14 +159,15 @@
                         <textarea id="txtMesaj" class="form-control" style="margin-top: 5px;" placeholder="iletilecek mesajı buraya giriniz.." rows="3"></textarea>
 
                         <button id="btnGonder" class="btn btn-light rightButton">Gönder</button>
+                        <button id="btnGrubaGonder" class="btn btn-light rightButton">Gruba Gönder</button>
 
                         <br><br><br>
 
                         <div class="list-group messages">   
                             <a class="list-group-item list-group-item-action message" aria-current="true">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 id="Sender"   class="mb-1"></h5>
-                                    <h5 id="Receiver" class="md-2"></h5>
+                                    <h5 class="mb-1"></h5>
+                                    <h5 class="md-2"></h5>
                                 </div>
                                 <p class="mb-1"></p>
                             </a>

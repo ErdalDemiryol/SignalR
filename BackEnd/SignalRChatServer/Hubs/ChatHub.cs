@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace SignalRChatServer.Hubs
 {
-    public class ChatHub: Hub
+    public class ChatHub : Hub
     {
-
         public async Task GetNickName(string nickName)
         {
             Client client = new Client
@@ -39,7 +38,6 @@ namespace SignalRChatServer.Hubs
             }
         }
 
-
         public async Task AddGroup(string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
@@ -60,17 +58,24 @@ namespace SignalRChatServer.Hubs
             foreach (var group in groupNames)
             {
                 Group _group = GroupSource.Groups.FirstOrDefault(g => g.GroupName == group);
-                _group.Clients.Add(client);
-                await Groups.AddToGroupAsync(Context.ConnectionId, group);
+                var result = _group.Clients.Any(c => c.ConnectionId == Context.ConnectionId);
+                if (!result) {
+                    _group.Clients.Add(client);
+                    await Groups.AddToGroupAsync(Context.ConnectionId, group);
+                }
             }
         }
 
-        public async Task GetClientToGroup(string groupname)
+        public async Task GetClientToGroup(string groupName)
         {
-            Group group= GroupSource.Groups.FirstOrDefault(g => g.GroupName == groupname);
-            await Clients.Caller.SendAsync("clients", group.Clients);
+            Group group = GroupSource.Groups.FirstOrDefault(g => g.GroupName == groupName);
+            await Clients.Caller.SendAsync("clients", groupName == "-1" ? ClientSource.Clients : group.Clients);
         }
 
+        public async Task SendMessageToGroupAsync(string groupName,string message)
+        {
+            await Clients.Group(groupName).SendAsync("receiveMessage", message, ClientSource.Clients.FirstOrDefault(c => c.ConnectionId == Context.ConnectionId).NickName);
+        }
 
     }
 }
