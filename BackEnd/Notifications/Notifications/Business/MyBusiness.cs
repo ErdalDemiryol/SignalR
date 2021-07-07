@@ -18,7 +18,5 @@ namespace Notifications.Business
             await _hubContext.Clients.All.SendAsync("receiveMessage", message);
         }
 
-
-
     }
 }
