@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/rjf21fmgoIWOoaAK+o1QIrXBb3y2pdTSAospypow2tbKD4hK2MK3C3wRBizKKzIE+qHPYp7qEwZj0WPesA9lQ==",
+  "dgSpecHash": "eMqx4wlOyrESSQc9fnSyh9Y9OMbWTayJ7QclbQ9qU/eAN2s2HtvlMxLy15XO6A+BaXmqFZ7b2MCo2ZZ6FJbbkw==",
   "success": true,
-  "projectFilePath": "D:\\Github\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj",
+  "projectFilePath": "D:\\GITHUB\\SIGNALR\\BackEnd\\SignalRChatServer\\SignalRChatServer.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
